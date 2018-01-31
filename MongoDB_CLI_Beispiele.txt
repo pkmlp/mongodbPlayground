@@ -105,4 +105,4 @@
 * Schliessen der MongoDB Shell und Verbindung zu MongoDB beenden
 *
 
--> quit()
+> quit()
