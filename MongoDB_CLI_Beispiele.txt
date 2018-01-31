@@ -1,0 +1,31 @@
+*
+* Starten der MongoDB Shell (CLI) und Verbindung zu MongoDB herstellen
+*
+
+-> mongo -u mongoAdmin -p pkmlp --authenticationDatabase admin 
+-> mongo -u mongoAdmin -p --authenticationDatabase admin
+
+
+
+*
+* Anzeigen der Datenbanken
+*
+
+-> show dbs 
+-> show databases 
+
+
+
+*
+* Auswählen einer Datenbank 
+*
+
+-> 
+
+
+
+*
+* Schliessen der MongoDB Shell und Verbindung zu MongoDB beenden
+*
+
+-> quit()
