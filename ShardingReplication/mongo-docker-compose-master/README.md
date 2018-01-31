@@ -16,6 +16,12 @@ The MongoDB environment consists of the following docker containers
 
 
 ## Setup Cluster
+Please make sure there is no other MongoDB Instanz running.
+
+    sudo service mongod stop
+
+
+
 This will pull all the images from Docker and run all the containers.
 
     docker-compose up -d
@@ -44,6 +50,6 @@ This will stop all comtainers.
 ## Persistent storage
 Data is stored at ./data/ and is excluded from version control. Data will be persistent between container runs. To remove all data 
 
-./reset
+    ./reset
 
  
