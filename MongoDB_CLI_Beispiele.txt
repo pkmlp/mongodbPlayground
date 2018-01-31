@@ -50,7 +50,7 @@
 
 
 *
-* Eingügen eines Dokumentes in die Collection in der ausgewählten Datenbank (C aus CRUD)
+* Einfügen eines Dokumentes in die Collection in der ausgewählten Datenbank (C aus CRUD)
 *
 
 > db.myCollection.insertOne(
@@ -106,3 +106,5 @@
 *
 
 > quit()
+
+
