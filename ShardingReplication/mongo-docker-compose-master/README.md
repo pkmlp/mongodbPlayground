@@ -41,7 +41,7 @@ You should now be able connect to mongos1 and the new sharded cluster from the m
 
 
 ## Stop Cluster
-This will stop all comtainers.
+This will stop all containers.
 
     docker-compose down
 
