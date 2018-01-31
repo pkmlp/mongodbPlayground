@@ -108,6 +108,7 @@
 > db.myCollection.drop()
 
 
+
 *
 * Löschen der selektierten Datenbank
 *
@@ -115,10 +116,10 @@
 > db.dropDatabase()
 
 
+
 *
 * Schliessen der MongoDB Shell und Verbindung zu MongoDB beenden
 *
 
 > quit()
-
-
+  
