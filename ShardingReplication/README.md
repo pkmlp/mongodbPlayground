@@ -3,7 +3,7 @@
 Init und Starten eines MongoDB Cluster: 
 
     > mlaunch --replicaset  \
-              --sharded tic tac toe \ 
+              --sharded tic tac toe \
               --config 3 \
               --mongos 3 \
               --port 30000 
