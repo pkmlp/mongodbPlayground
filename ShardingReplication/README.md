@@ -2,7 +2,9 @@
 
 Init und Starten eines MongoDB Cluster: 
 
-    > mlaunch --replicaset  \
+    > mlaunch init \
+              --replicaset \
+              --nodes 3 \
               --sharded tic tac toe \
               --config 3 \
               --mongos 3 \
