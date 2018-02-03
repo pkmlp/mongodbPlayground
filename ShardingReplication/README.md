@@ -8,7 +8,7 @@ Init und Starten eines MongoDB Cluster:
               --sharded tic tac toe \
               --config 3 \
               --mongos 3 \
-              --port 30000 
+              --port 30000
 
 
 Auflisten der Cluster Komponenten: 
