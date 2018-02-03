@@ -43,7 +43,7 @@ einloggen ...
     > show dbs
 
 ... die Datenbanken anzeigen lassen. Nach dem login sehen wir im MongoDB-Shell-Prompt 
-den Namen des jweilgen Shard und den Sttus des darauf enthaltenen Replica-Set (primary,
+den Namen des jweilgen Shard und den Status des darauf enthaltenen Replica-Set (primary,
 secondary). Nur auf einem der Shards ist die von uns angelegte Datenbank myDatabase auch
 wirklich vorhanden. Den Inhalt der Datenbank können wir uns mit ...
 
@@ -56,7 +56,7 @@ wirklich vorhanden. Den Inhalt der Datenbank können wir uns mit ...
 Nun können wir auch prüfen, ob das erstellte Dokument auch auf den Replica-Sets des 
 entsprechenden Shards ist. Pro Shard gibt es zwei Replica-Sets, die jeweils in einer
 eigenen MongoDB Instanz angelegt wurden. Die beiden Replica-Set Instanzen haben die 
-jeweils nächsten Port-Nummern des Primary des Shards. Loggen wir also auf das erste
+jeweils folgenden Port-Nummern des Primary des Shards. Loggen wir also auf das erste
 Replica-Set des Shards ein ...
 
     > mongo --port 30004 (resp. der Port-Nr +1 aus sh.status))
@@ -72,13 +72,15 @@ Replica-Set des Shards ein ...
 
 Das bedeutet, das wir nicht ohne weiteres Daten aus einem der Replica-Sets lesen
 können. Wir müssen explizit angeben, dass wir wissen, dass wir auf ein Replica-Set
-zugreifen un das wir nichts ändern wollen:
+zugreifen und dass wir nichts ändern wollen:
 
     > db.setSlaveOk()
     > db.myCollection.find()
 
-Damit wird nun das Dokument angezeigt. Auf einem Secondary Replica-Set können keine
-Dokumente eingefügt werden. Diese können nur auf dem Primary Replica-Set erstellt werden. 
+Damit wird nun das Dokument angezeigt. 
+
+Auf einem Secondary Replica-Set können keine Dokumente eingefügt werden. Diese 
+können nur auf dem Primary Replica-Set erstellt werden. 
 
 
 Stoppen des Cluster: 
