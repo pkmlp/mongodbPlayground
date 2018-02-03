@@ -27,8 +27,12 @@ angesprochen werden, als ob es eine einige MongoDB Instanz ist. Die Verteilung d
 Daten auf die Shards und die Spiegelung der Daten auf die Replica-Sets managed
 MongoDB von alleine.
 
-Wenn nun ein (ein einziges) Document in der Datenbank myDatabase in der Collection myCollection erstellt wird, so wid dieses Dokument auf einem der Shards angelegt und 
-dort auch auf die Replica-Sets gespiegelt. Um das zu sehen, greifen wir direkt auf die Shards zu (Wichtig: dies ist egentlich nicht üblich. Der Zugriff auf die Daten erfolgt i.d.R. immer über den Router und dieser managed alles). Die Port-Nummern der Shards entnehmen wir der Cluster-Config, die mit ... 
+Wenn nun ein (ein einziges) Document in der Datenbank myDatabase in der Collection
+myCollection erstellt wird, so wid dieses Dokument auf einem der Shards angelegt und 
+dort auch auf die Replica-Sets gespiegelt. Um das zu sehen, greifen wir direkt auf die
+Shards zu (Wichtig: dies ist egentlich nicht üblich. Der Zugriff auf die Daten erfolgt 
+i.d.R. immer über den Router und dieser managed alles). Die Port-Nummern der Shards 
+entnehmen wir der Cluster-Config, die mit ... 
 
     > sh.status()
 
@@ -101,3 +105,4 @@ arbeiten. Soll alles weggeräumt werden, das komplette Verzeichnis löschen
 
 
 link zu mtools: https://github.com/rueckstiess/mtools 
+
