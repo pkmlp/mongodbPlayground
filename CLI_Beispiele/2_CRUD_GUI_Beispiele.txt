@@ -1,0 +1,15 @@
+*
+* Für die CRUD-Beispiel mit einem GUI stehen die zwei MongoDB-GUI
+*
+*   --> MongoDB Compass (das von MongoDB selbst herausgegebene GUI) und
+*   --> Studio 3t (ein sehr mächtiges Third-Party-Tool)
+*
+* zur Verfügung. 
+*
+* Der Anspruch der GUIs ist gerade der, dass alles intuitiv sein soll.
+* Darum hat es an dieser Stelle keine weiteren Ausführungen, ausser
+* der Empfehlung, zuerst die CLI-Beispiele durchzuarbeiten, da damit
+* das Prinzip der Erstellung, Löschung und Änderung von Dokumenten in 
+* der Dokumenten-Datenbank geübt wird.
+*
+*
