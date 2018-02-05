@@ -9,7 +9,7 @@
 * Der Anspruch der GUIs ist gerade der, dass alles intuitiv sein soll.
 * Darum hat es an dieser Stelle keine weiteren Ausführungen, ausser
 * der Empfehlung, zuerst die CLI-Beispiele durchzuarbeiten, da damit
-* das Prinzip der Erstellung, Löschung und Änderung von Dokumenten in 
-* der Dokumenten-Datenbank geübt wird.
+* das Prinzip der JSON Dokumente und der Erstellung, Löschung und Änderung 
+* von Dokumenten in einer Dokumenten-Datenbank geübt wird.
 *
 *
