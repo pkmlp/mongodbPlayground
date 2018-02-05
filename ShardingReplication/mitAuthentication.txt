@@ -1,0 +1,72 @@
+*
+* Demo eines MongoDB Clusters mit Authentifizierung
+*
+* Beachte dazu unbedingt: https://docs.mongodb.com/manual/core/security-users/#sharding-security 
+*   --> direkter Zugriff auf die einzelnen Shards ist nicht ohne zusätzliche Aktionen möglich
+*       für Demo-Zwecke bei denen auf einzelne Shards und Replica-Sets zugegriffen werden soll,
+*       enpfehle ich den Cluster ohen Authentifizierung aufzusetzen. Für den eigentlichen Einsatz
+*       eines CLusters den Cluster mit Authentication aufsetzen und folgendes beachten:
+*
+*       --> Important:  Always connect and authenticate to sharded clusters via a mongos instance.
+*
+*
+
+Init und Starten eines MongoDB Clusters mit Authentifizierung: 
+
+    > mlaunch init \
+              --auth \
+              --username mongoAdmin \
+              --password pkmlp \
+              --replicaset \
+              --nodes 3 \
+              --sharded tic tac toe \
+              --config 3 \
+              --mongos 3 \
+              --port 30000
+
+
+Auflisten der Cluster Komponenten: 
+
+    > mlaunch list
+
+
+Zugreifen auf den Cluster: Alle Kommunikation it dem Cluster erfolgt über die 
+Mongo Router (mongos). Dieser ist auf dem Port 30000. Somit kann aus einer
+Linux-Shell oder über ein MongoDB GUI "normal" zugegriffen werden. 
+
+    > mongo --port 30000
+
+Öffnet eine MongoDB Shell auf dem MongoDB Router mongos. Damit kann der Cluster 
+angesprochen werden, als ob es eine einzige MongoDB Instanz ist. Die Verteilung der
+Daten auf die Shards und die Spiegelung der Daten auf die Replica-Sets managed
+MongoDB von alleine.
+
+Mit ...
+
+    > show dbs
+    > use myDatebase
+    > show collections
+    > db.myCollection.find()
+
+... anzeigen lassen. 
+
+
+Stoppen des Cluster: 
+
+    > mlaunch stop
+
+
+Starten des Cluster: 
+
+    > mlaunch start 
+
+
+Um den Cluster zu starten, am besten ein Verzeichnis erstellen dann in diesem 
+einmal "Init und Starten" ausführen. Nachher nur noch mit "Stoppen" und "Starten" 
+arbeiten. Soll alles weggeräumt werden, das komplette Verzeichnis löschen
+
+    > rm -r data
+
+
+link zu mtools: https://github.com/rueckstiess/mtools 
+

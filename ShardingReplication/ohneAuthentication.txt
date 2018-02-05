@@ -1,4 +1,11 @@
-# Demo eines MongoDB Clusters
+*
+* Demo eines MongoDB Clusters ohne Authentifizierung 
+*
+*     --> zu Demozwecken und um direkt auf jeden einzelnen
+*         Shard und die einzelnen Replica-Set-Member 
+*         zugreifen zu können.
+*
+
 
 Init und Starten eines MongoDB Cluster: 
 
@@ -105,4 +112,3 @@ arbeiten. Soll alles weggeräumt werden, das komplette Verzeichnis löschen
 
 
 link zu mtools: https://github.com/rueckstiess/mtools 
-
