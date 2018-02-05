@@ -104,6 +104,14 @@ oder
 
 
 *
+* Lesen aller Dokumente in der Collection in der ausgewählten Datenbank (R aus CRUD)
+*
+
+> db.myCollection.find()
+
+
+
+*
 * Lesen eines Dokumentes in der Collection in der ausgewählten Datenbank (R aus CRUD)
 *
 
