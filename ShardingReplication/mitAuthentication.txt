@@ -4,8 +4,8 @@
 * Beachte dazu unbedingt: https://docs.mongodb.com/manual/core/security-users/#sharding-security 
 *   --> direkter Zugriff auf die einzelnen Shards ist nicht ohne zusätzliche Aktionen möglich
 *       für Demo-Zwecke bei denen auf einzelne Shards und Replica-Sets zugegriffen werden soll,
-*       enpfehle ich den Cluster ohen Authentifizierung aufzusetzen. Für den eigentlichen Einsatz
-*       eines CLusters den Cluster mit Authentication aufsetzen und folgendes beachten:
+*       enpfehle ich den Cluster ohne Authentifizierung aufzusetzen. Für den eigentlichen Einsatz
+*       eines Clusters diesen mit Authentication aufsetzen und folgendes beachten:
 *
 *       --> Important:  Always connect and authenticate to sharded clusters via a mongos instance.
 *
@@ -30,7 +30,7 @@ Auflisten der Cluster Komponenten:
     > mlaunch list
 
 
-Zugreifen auf den Cluster: Alle Kommunikation it dem Cluster erfolgt über die 
+Zugreifen auf den Cluster: Alle Kommunikation mit dem Cluster erfolgt über die 
 Mongo Router (mongos). Dieser ist auf dem Port 30000. Somit kann aus einer
 Linux-Shell oder über ein MongoDB GUI "normal" zugegriffen werden. 
 
@@ -38,17 +38,19 @@ Linux-Shell oder über ein MongoDB GUI "normal" zugegriffen werden.
 
 Öffnet eine MongoDB Shell auf dem MongoDB Router mongos. Damit kann der Cluster 
 angesprochen werden, als ob es eine einzige MongoDB Instanz ist. Die Verteilung der
-Daten auf die Shards und die Spiegelung der Daten auf die Replica-Sets managed
-MongoDB von alleine.
+Daten auf die Shards und die Spiegelung der Daten auf die Replica-Sets sowie die 
+User-Authentication managed MongoDB von alleine.
 
 Mit ...
 
     > show dbs
     > use myDatebase
     > show collections
+    > db.myCollection.insert({firstname:"Peter", lastname:"Kessler"})
     > db.myCollection.find()
 
-... anzeigen lassen. 
+... die Datenbank myDatabase anlegen (resp. auswählen wenn bereits vorhanden) und darin 
+    ein Dokument in der Collection myCollection anlegen und anzeigen lassen. 
 
 
 Stoppen des Cluster: 

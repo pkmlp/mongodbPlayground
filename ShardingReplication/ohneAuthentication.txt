@@ -2,12 +2,12 @@
 * Demo eines MongoDB Clusters ohne Authentifizierung 
 *
 *     --> zu Demozwecken und um direkt auf jeden einzelnen
-*         Shard und die einzelnen Replica-Set-Member 
+*         Shard und direkt die einzelnen Replica-Set-Member 
 *         zugreifen zu können.
 *
 
 
-Init und Starten eines MongoDB Cluster: 
+Init und Starten eines MongoDB Cluster ohne Authentifizierung: 
 
     > mlaunch init \
               --replicaset \
@@ -23,7 +23,7 @@ Auflisten der Cluster Komponenten:
     > mlaunch list
 
 
-Zugreifen auf den Cluster: Alle Kommunikation it dem Cluster erfolgt über die 
+Zugreifen auf den Cluster: Alle Kommunikation mit dem Cluster erfolgt über die 
 Mongo Router (mongos). Dieser ist auf dem Port 30000. Somit kann aus einer
 Linux-Shell oder über ein MongoDB GUI "normal" zugegriffen werden. 
 
@@ -33,6 +33,10 @@ Linux-Shell oder über ein MongoDB GUI "normal" zugegriffen werden.
 angesprochen werden, als ob es eine einige MongoDB Instanz ist. Die Verteilung der
 Daten auf die Shards und die Spiegelung der Daten auf die Replica-Sets managed
 MongoDB von alleine.
+
+Da dieser Cluster mit allen Komponenten redundant aufgesetzt ist, gibt es auch 
+dreiMongo Router (mongos), die über die Ports 30000, 30001 und 30002 angesprochen
+werden. Somit kann den drei Mongo Router ein Load-Balancer vorgeschaltet werden.
 
 Wenn nun ein (ein einziges) Document in der Datenbank myDatabase in der Collection
 myCollection erstellt wird, so wid dieses Dokument auf einem der Shards angelegt und 
