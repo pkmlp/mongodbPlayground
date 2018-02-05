@@ -1,9 +1,24 @@
 *
 * Starten der MongoDB Shell (CLI) und Verbindung zu MongoDB herstellen
 *
+* Auf der lokalen MongoDB Instanz (auf Standard Port 27017) sind zwei User
+* eingerichtet:
+*
+*    -> mongoAdmin / pkmlp (der MongoDB Administrator)
+*    -> pkmlp / pkmlp (ein User mit DB-Admin-Rechten auf meineDatenbank)
+*
+* Für die folgenden Beispiele können beide User benutzt werden, wobei ich
+* empfehle, beim User pkmlp jeweils die Datenbank meineDatenbank anstelle
+* von myDatabase zu verwenden.
+*
 
 -> mongo -u mongoAdmin -p pkmlp --authenticationDatabase admin 
 -> mongo -u mongoAdmin -p --authenticationDatabase admin
+
+oder
+
+-> mongo -u pkmlp -p pkmlp --authenticationDatabase meineDatenbank 
+-> mongo -u pkmlp -p --authenticationDatabase meineDatenbank
 
 
 
@@ -21,7 +36,11 @@
 * Die Datenbank wird erst beim Erstellen einer Collection erstellt
 *
 
-> use myDatabase
+> use myDatabase (falls mit User mongoAdmin eingeloggt)
+
+oder
+
+> use meineDatenbank (falls mit User pkmlp eingeloggt)
 
 
 
@@ -34,14 +53,6 @@
 
 
 *
-* Erstellen einer Collection in der ausgewählten Datenbank
-*
-
-> db.createCollection("myCollection")
-
-
-
-*
 * Anzeigen der Collections in der ausgewählten Datenbank
 *
 
@@ -50,11 +61,36 @@
 
 
 *
+* Erstellen einer Collection (sofern nicht vorhanden) in der ausgewählten Datenbank
+*
+
+> db.createCollection("myCollection") (falls mit User mongoAdmin eingeloggt)
+
+oder 
+
+> db.createCollection("meineSammlung") (falls mit User pkmlp eingeloggt)
+
+
+*
 * Einfügen eines Dokumentes in die Collection in der ausgewählten Datenbank (C aus CRUD)
 *
 
 > db.myCollection.insertOne(
-{
+  {
+    firstname: "Peter",
+    lastname: "Kessler",
+    contactdata: {
+        email: "peter.kessler@students.ffhs.ch",
+        mobile: "+41 79 670 01 13",
+        home: "+41 44 371 75 62"
+    }
+  }
+)
+
+oder
+
+> db.meineSammlung.insertOne(
+  {
     firstname: "Peter",
     lastname: "Kessler",
     contactdata: {
@@ -73,6 +109,10 @@
 
 > db.myCollection.find({firstname: "Peter"})
 
+oder
+
+> db.meineSammlung.find({firstname: "Peter"})
+
 
 
 *
@@ -80,17 +120,16 @@
 *
 
 > db.myCollection.update(
-
     { firstname: "Peter" },
+    { $set: { firstname: "Peter E." } }
+  )
 
-    {
+oder
 
-        $set: { firstname: "Peter E." }
-
-    }
-
-)
-
+> db.meineSammlung.update(
+    { firstname: "Peter" },
+    { $set: { firstname: "Peter E." } }
+  )
 
 
 *
@@ -99,6 +138,10 @@
 
 > db.myCollection.remove({lastname: "Kessler"})
 
+oder
+
+> db.meineSammlung.remove({lastname: "Kessler"})
+
 
 
 *
@@ -106,6 +149,10 @@
 *
 
 > db.myCollection.drop()
+
+oder
+
+> db.meineSammlung.drop()
 
 
 
@@ -122,4 +169,4 @@
 *
 
 > quit()
-  
+
