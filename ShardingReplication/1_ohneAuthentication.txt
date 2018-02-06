@@ -57,7 +57,7 @@ Erstellen wir ein Dokument wie folgt:
     > show dbs
     > use myDatebase
     > show collections
-    > db.myCollection.insert("AnzDok":"0", "Timestamp":"gerade eben", "Remark":"manuell eingefügt")
+    > db.myCollection.insert({"AnzDok":"0", "Timestamp":"gerade eben", "Remark":"manuell eingefügt"})
     > db.myCollection.find()
 
 Damit haben wir die Datenbank myDatabase angelegt (resp. ausgewählt wenn diese bereits 
@@ -81,13 +81,16 @@ einloggen ...
     > show dbs
 
 ... die Datenbanken anzeigen lassen. Nach dem login sehen wir im MongoDB-Shell-Prompt 
-den Namen des jweilgen Shard und den Status des darauf enthaltenen Replica-Set (primary,
-secondary). Nur auf einem der Shards ist die von uns angelegte Datenbank myDatabase auch
-wirklich vorhanden. Den Inhalt der Datenbank können wir uns mit ...
+den Namen des jeweilgen Shard und den Status des darauf enthaltenen Replica-Set (primary,
+secondary). Auf allen der Shards ist die von uns angelegte Datenbank myDatabase auch
+wirklich vorhanden, aber nur in einer darf das eingefügte Dokuemtn sein.  
+
+Den Inhalt der Datenbank auf den einzenen Shards können wir uns mit ...
 
     > use myDatebase
     > show collections
-    > db.myCollection.find()
+    > db.myCollection.find().count()          zeigt die Anzahl der Dokumente an
+    > db.myCollection.find()                  zeigt die Inhalte aller Dokumente an
 
 ... anzeigen lassen. 
 
@@ -146,3 +149,4 @@ In einem zweiten Durchgang kann die Verteilung der Dokumente auf die Shards
 beobachtet werden. Dazu gibt es ein Python-Script "dataLoad.py" in diesem
 Verzeichnis, mit dem eine beliebige Anzahl Dokumente erstellt werden kann.
 Die gewünschte Anzahl auf Zeile 36 im Script entsprechend anpassen.
+
