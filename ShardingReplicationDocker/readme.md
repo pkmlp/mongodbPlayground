@@ -117,10 +117,12 @@ One of them will be primary, the others are secondary
 
 ## Test Scenario
 
-Step 1. Connect to MongoDB-Router 
+Step 1. Connect to MongoDB-Router
+
       > docker-compose exec router mongo
 
 Step 2. Create a Database and a Collection with only one Dokument:
+
       > use myDatabase
       > db.myCollection.insert({firstename:"Peter", lastname:"Kessler"})
       > db.myCollection.find()
@@ -137,6 +139,7 @@ Step 3. Check on which shard the Database was created (use the primary of each r
 You should see the database only on one of the shards:
 
 Step 4. Check whether the database.collection.document is on all replica-sets in the shards
+
       > mongo --host 192.168.0.121 --port 27108 (assuming the database.collection.document is on shared2)
       > use myDatabase
       > db.myCollection.find()
@@ -151,6 +154,7 @@ Step 4. Check whether the database.collection.document is on all replica-sets in
       > quit()
       
 Step 5. Create more documents and check whether they are really sharded and replicated
+
       > ...
 
 
