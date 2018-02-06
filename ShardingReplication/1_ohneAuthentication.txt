@@ -97,7 +97,7 @@ eigenen MongoDB Instanz angelegt wurden. Die beiden Replica-Set Instanzen haben 
 jeweils folgenden Port-Nummern des Primary des Shards. Loggen wir also auf das erste
 Replica-Set des Shards ein ...
 
-    > mongo --port 30004 (resp. der Port-Nr +1 aus sh.status))
+    > mongo --port 30003 (resp. der Port-Nr +1 aus sh.status))
 
 ... und versuchen wir auf das Dokument zuzugreifen ...
 
