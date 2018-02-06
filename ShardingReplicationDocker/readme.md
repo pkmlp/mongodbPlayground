@@ -44,6 +44,7 @@ This script has a `sleep 20` to wait for the config server and shards to elect t
 	> docker-compose exec router mongo
 	mongos> sh.status()
 
+---
   --- Sharding Status ---
   sharding version: {
         "_id" : 1,
@@ -67,7 +68,7 @@ This script has a `sleep 20` to wait for the config server and shards to elect t
                 No recent migrations
   databases:
         {  "_id" : "config",  "primary" : "config",  "partitioned" : true }
-
+---
 
 ## Normal Startup
 
@@ -98,7 +99,7 @@ Execute the **First Run (initial setup)**  instructions again.
 
 **Config:**
 
-The containers are configures as follows:
+The containers are configured as follows:
 * router    IP 192.168.0.77   PORT 27017
 * config1   IP 192.168.0.11   PORT 27017 
 * config2   IP 192.168.0.12   PORT 27017 
@@ -116,15 +117,16 @@ One of them will be primary, the others are secondary
 
 ## Test Scenario
 
-1. Connect to MongoDB-Router 
+Step 1. Connect to MongoDB-Router 
       > docker-compose exec router mongo
 
-2. Create a Database and a Collection with only one Dokument:
+Step 2. Create a Database and a Collection with only one Dokument:
       > use myDatabase
       > db.myCollection.insert({firstename:"Peter", lastname:"Kessler"})
       > db.myCollection.find()
 
-3. Check on which shard the Database was created (use the primary of each replica set)
+Step 3. Check on which shard the Database was created (use the primary of each replica set)
+
       > mongo --host 192.168.0.111 --port 27108 (assuming shard01a is primary)
       > show dbs
       > mongo --host 192.168.0.121 --port 27108 (assuming shared02a is primary)
@@ -134,7 +136,7 @@ One of them will be primary, the others are secondary
       
 You should see the database only on one of the shards:
 
-4. Check whether the database.collection.document is on all replica-sets in the shards
+Step 4. Check whether the database.collection.document is on all replica-sets in the shards
       > mongo --host 192.168.0.121 --port 27108 (assuming the database.collection.document is on shared2)
       > use myDatabase
       > db.myCollection.find()
@@ -148,8 +150,7 @@ You should see the database only on one of the shards:
       > db.myCollection.find()
       > quit()
       
-5. Create more documents and check whether they are really sharded
+Step 5. Create more documents and check whether they are really sharded and replicated
       > ...
 
 
-      
