@@ -111,9 +111,9 @@ The containers are configured as follows:
 * shard3    IP 192.168.0.131 / .132 / .133   PORT 27020
 
 To access replica-sets in shard1:
-* mongo --host 192.168.0.111 --port 27108
-* mongo --host 192.168.0.112 --port 27108
-* mongo --host 192.168.0.113 --port 27108
+* mongo --host 192.168.0.111 --port 27018
+* mongo --host 192.168.0.112 --port 27018
+* mongo --host 192.168.0.113 --port 27018
 One of them will be primary, the others are secondary
 
 
