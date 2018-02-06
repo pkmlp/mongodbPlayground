@@ -17,12 +17,16 @@ Heavily inspired by [https://github.com/jfollenfant/mongodb-sharding-docker-comp
 	* `shard03a`,`shard03b`,`shard03c`
 * 1 Router (mongos): `router`
 
-* (TODO): DB data persistence using docker data volumes
-* (TODO): DB Authentication
+(TODO): DB data persistence using docker data volumes
+(TODO): DB Authentication
 
 
 
 ## First Run (initial setup)
+
+**Make sure there is no other MongoDB Instanc running**
+
+	> sudo service mongod stop
 
 **Start all of the containers** (daemonized)
 
@@ -92,27 +96,55 @@ Execute the **First Run (initial setup)**  instructions again.
 
 # Analyzing the Cluster
 
-to access a shard, we need the IP-Adress of the shard and the port the Shard is using
+**Config:**
 
-## Get IP-Adress of a shard
+The containers are configures as follows:
+* router    IP 192.168.0.77   PORT 27017
+* config1   IP 192.168.0.11   PORT 27017 
+* config2   IP 192.168.0.12   PORT 27017 
+* config3   IP 192.168.0.13   PORT 27017 
+* shard1    IP 192.168.0.111 / .112 / .113   PORT 27018
+* shard2    IP 192.168.0.121 / .122 / .123   PORT 27019
+* shard3    IP 192.168.0.131 / .132 / .133   PORT 27020
 
-To get the IP-Adress of an specific shard, you can inspect the container by:
+To access replica-sets in shard1:
+* mongo --host 192.168.0.111 --port 27108
+* mongo --host 192.168.0.112 --port 27108
+* mongo --host 192.168.0.113 --port 27108
+One of them will be primary, the others are secondary
 
-	> docker inspect <containername>
 
-To find the containername use 
+## Test Scenario
 
-	> docker ps
+1. Connect to MongoDB-Router 
+      > docker-compose exec router mongo
 
-To find the port the shard is listen on, use
+2. Create a Database and a Collection with only one Dokument:
+      > use myDatabase
+      > db.myCollection.insert({firstename:"Peter", lastname:"Kessler"})
+      > db.myCollection.find()
 
-	docker-compose exec router mongo
-	> sh.status()
+3. Check on which shard the Database was created (use the primary of each replica set)
+      > mongo --host 192.168.0.111 --port 27108 (assuming shard01a is primary)
+      > show dbs
+      > mongo --host 192.168.0.121 --port 27108 (assuming shared02a is primary)
+      > show dbs
+      > mongo --host 192.168.0.131 --port 27108 (assuming shared03a is primary)
+      > show dbs
+      
+You should see the database only on one of the shards:
 
-shards:
-        {  "_id" : "shard01",  "host" : "shard01/shard01a:27018,shard01b:27018,shard01c:27018",  "state" : 1 }
-        {  "_id" : "shard02",  "host" : "shard02/shard02a:27019,shard02b:27019,shard02c:27019",  "state" : 1 }
-        {  "_id" : "shard03",  "host" : "shard03/shard03a:27020,shard03b:27020,shard03c:27020",  "state" : 1 }
-
-Hint: The ports the shards are listen to may also be found in the docker-compose-yaml file.
-
+4. Check whether the database.collection.document is on all replica-sets in the shards
+      > mongo --host 192.168.0.121 --port 27108 (assuming the database.collection.document is on shared2)
+      > use myDatabase
+      > db.myCollection.find()
+      > quit()
+      > mongo --host 192.168.0.122 --port 27108 
+      > use myDatabase
+      > db.myCollection.find()
+      > quit()
+      > mongo --host 192.168.0.123 --port 27108 
+      > use myDatabase
+      > db.myCollection.find()
+      > quit()
+      
