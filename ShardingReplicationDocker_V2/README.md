@@ -1,5 +1,9 @@
 # mongodb-sharding-docker-compose
 
+Quelle: https://github.com/jfollenfant/mongodb-sharding-docker-compose 
+
+
+
 :whale: docker-compose stack that allows you to turn on a full MongoDB sharded cluster with the following components :
 
  * configserver replicaset: 3x mongod with configsrv enabled 
