@@ -1,4 +1,5 @@
 version: '2'
+
 services:
 
   ## Config Servers
@@ -7,16 +8,31 @@ services:
     command: mongod --port 27017 --configsvr --replSet configserver --noprealloc --smallfiles --oplogSize 16
     volumes:
       - ./scripts:/scripts
+    networks:
+      mongodb_cluster:
+          ipv4_address: 192.168.0.11
+          aliases: 
+              - config01
   config02:
     image: mongo
     command: mongod --port 27017 --configsvr --replSet configserver --noprealloc --smallfiles --oplogSize 16
     volumes:
       - ./scripts:/scripts
+    networks:
+      mongodb_cluster:
+          ipv4_address: 192.168.0.12
+          aliases: 
+              - config02
   config03:
     image: mongo
     command: mongod --port 27017 --configsvr --replSet configserver --noprealloc --smallfiles --oplogSize 16
     volumes:
       - ./scripts:/scripts
+    networks:
+      mongodb_cluster:
+          ipv4_address: 192.168.0.13
+          aliases: 
+              - config03
 
   ## Shards
   shard01a:
@@ -24,31 +40,92 @@ services:
     command: mongod --port 27018 --shardsvr --replSet shard01 --noprealloc --smallfiles --oplogSize 16
     volumes:
       - ./scripts:/scripts
+    networks:
+      mongodb_cluster:
+          ipv4_address: 192.168.0.111
+          aliases: 
+              - shard01a
+
   shard01b:
     image: mongo
     command: mongod --port 27018 --shardsvr --replSet shard01 --noprealloc --smallfiles --oplogSize 16
     volumes:
       - ./scripts:/scripts
+    networks:
+      mongodb_cluster:
+          ipv4_address: 192.168.0.112
+          aliases: 
+              - shard01b
+  shard01c:
+    image: mongo
+    command: mongod --port 27018 --shardsvr --replSet shard01 --noprealloc --smallfiles --oplogSize 16
+    volumes:
+      - ./scripts:/scripts
+    networks:
+      mongodb_cluster:
+          ipv4_address: 192.168.0.113
+          aliases: 
+              - shard01c
   shard02a:
     image: mongo
     command: mongod --port 27019 --shardsvr --replSet shard02 --noprealloc --smallfiles --oplogSize 16
     volumes:
       - ./scripts:/scripts
+    networks:
+      mongodb_cluster:
+          ipv4_address: 192.168.0.121
+          aliases: 
+              - shard02a
   shard02b:
     image: mongo
     command: mongod --port 27019 --shardsvr --replSet shard02 --noprealloc --smallfiles --oplogSize 16
     volumes:
       - ./scripts:/scripts
+    networks:
+      mongodb_cluster:
+          ipv4_address: 192.168.0.122
+          aliases: 
+              - shard02b
+  shard02c:
+    image: mongo
+    command: mongod --port 27019 --shardsvr --replSet shard02 --noprealloc --smallfiles --oplogSize 16
+    volumes:
+      - ./scripts:/scripts
+    networks:
+      mongodb_cluster:
+          ipv4_address: 192.168.0.123
+          aliases: 
+              - shard02c
   shard03a:
     image: mongo
     command: mongod --port 27020 --shardsvr --replSet shard03 --noprealloc --smallfiles --oplogSize 16
     volumes:
       - ./scripts:/scripts
+    networks:
+      mongodb_cluster:
+          ipv4_address: 192.168.0.131
+          aliases: 
+              - shard03a
   shard03b:
     image: mongo
     command: mongod --port 27020 --shardsvr --replSet shard03 --noprealloc --smallfiles --oplogSize 16
     volumes:
       - ./scripts:/scripts
+    networks:
+      mongodb_cluster:
+          ipv4_address: 192.168.0.132
+          aliases: 
+              - shard03b
+  shard03c:
+    image: mongo
+    command: mongod --port 27020 --shardsvr --replSet shard03 --noprealloc --smallfiles --oplogSize 16
+    volumes:
+      - ./scripts:/scripts
+    networks:
+      mongodb_cluster:
+          ipv4_address: 192.168.0.133
+          aliases: 
+              - shard03c
 
   ## Router
   router:
@@ -58,13 +135,31 @@ services:
       - "27017:27017"
     volumes:
       - ./scripts:/scripts
+    networks:
+      mongodb_cluster:
+          ipv4_address: 192.168.0.77
+          aliases: 
+              - router
     depends_on:
       - config01
       - config02
       - config03
       - shard01a
       - shard01b
+      - shard01c
       - shard02a
       - shard02b
+      - shard02c
       - shard03a
       - shard03b
+      - shard03c
+
+
+networks:
+  mongodb_cluster:
+      ipam:
+          driver: default
+          config: 
+              - subnet: 192.168.0.0/24
+
+
