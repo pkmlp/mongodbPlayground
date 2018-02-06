@@ -17,8 +17,9 @@ Heavily inspired by [https://github.com/jfollenfant/mongodb-sharding-docker-comp
 	* `shard03a`,`shard03b`,`shard03c`
 * 1 Router (mongos): `router`
 
-(TODO): DB data persistence using docker data volumes
-(TODO): DB Authentication
+TODO: 
+* DB data persistence using docker data volumes
+* DB Authentication
 
 
 
