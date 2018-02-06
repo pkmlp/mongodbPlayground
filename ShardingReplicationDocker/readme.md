@@ -148,3 +148,8 @@ You should see the database only on one of the shards:
       > db.myCollection.find()
       > quit()
       
+5. Create more documents and check whether they are really sharded
+      > ...
+
+
+      
