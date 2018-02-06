@@ -44,29 +44,31 @@ This script has a `sleep 20` to wait for the config server and shards to elect t
 	> docker-compose exec router mongo
 	mongos> sh.status()
 
-` --- Sharding Status --- `
-`  sharding version: {`
-`        "_id" : 1,`
-`        "minCompatibleVersion" : 5,`
-`        "currentVersion" : 6,`
-`        "clusterId" : ObjectId("5a795a6b5179f663653ba8b3")`
-`  }`
-`  shards:`
-`        {  "_id" : "shard01",  "host" : "shard01/shard01a:27018,shard01b:27018,shard01c:27018",  "state" : 1 }`
-`        {  "_id" : "shard02",  "host" : "shard02/shard02a:27019,shard02b:27019,shard02c:27019",  "state" : 1 }`
-`        {  "_id" : "shard03",  "host" : "shard03/shard03a:27020,shard03b:27020,shard03c:27020",  "state" : 1 }`
-`  active mongoses:`
-`        "3.6.2" : 1`
-`  autosplit:`
-`        Currently enabled: yes`
-`  balancer:`
-`        Currently enabled:  yes`
-`        Currently running:  no`
-`        Failed balancer rounds in last 5 attempts:  0`
-`        Migration Results for the last 24 hours:`
-`                No recent migrations`
-`  databases:`
-`        {  "_id" : "config",  "primary" : "config",  "partitioned" : true }`
+``` 
+--- Sharding Status --- 
+  sharding version: {
+        "_id" : 1,
+        "minCompatibleVersion" : 5,
+        "currentVersion" : 6,
+        "clusterId" : ObjectId("5a795a6b5179f663653ba8b3")
+  }
+  shards:
+        {  "_id" : "shard01",  "host" : "shard01/shard01a:27018,shard01b:27018,shard01c:27018",  "state" : 1 }
+        {  "_id" : "shard02",  "host" : "shard02/shard02a:27019,shard02b:27019,shard02c:27019",  "state" : 1 }
+        {  "_id" : "shard03",  "host" : "shard03/shard03a:27020,shard03b:27020,shard03c:27020",  "state" : 1 }
+  active mongoses:
+        "3.6.2" : 1
+  autosplit:
+        Currently enabled: yes
+  balancer:
+        Currently enabled:  yes
+        Currently running:  no
+        Failed balancer rounds in last 5 attempts:  0
+        Migration Results for the last 24 hours:
+                No recent migrations
+  databases:
+        {  "_id" : "config",  "primary" : "config",  "partitioned" : true }
+```
 
 
 ## Normal Startup
