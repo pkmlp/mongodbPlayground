@@ -40,10 +40,23 @@ werden. Somit kann den drei Mongo Router ein Load-Balancer vorgeschaltet werden.
 
 Wenn nun ein (ein einziges) Document in der Datenbank myDatabase in der Collection
 myCollection erstellt wird, so wid dieses Dokument auf einem der Shards angelegt und 
-dort auch auf die Replica-Sets gespiegelt. Um das zu sehen, greifen wir direkt auf die
-Shards zu (Wichtig: dies ist egentlich nicht üblich. Der Zugriff auf die Daten erfolgt 
-i.d.R. immer über den Router und dieser managed alles). Die Port-Nummern der Shards 
-entnehmen wir der Cluster-Config, die mit ... 
+dort auch auf die Replica-Sets gespiegelt. 
+
+Erstellen wir ein Dokument wie folgt:
+
+    > show dbs
+    > use myDatebase
+    > show collections
+    > db.myCollection.insert({firstname:"Peter", lastname:"Kessler"})
+    > db.myCollection.find()
+
+Damit haben wir die Datenbank myDatabase angelegt (resp. ausgewählt wenn diese bereits 
+vorhanden) und darin ein Dokument in der Collection myCollection angelegt und angezeigt. 
+
+Um nun zu sehen, auf welchem Shard die DB (das Dokument) angelegt wurde, greifen wir 
+direkt auf die Shards zu (Wichtig: dies ist egentlich nicht üblich. Der Zugriff auf die 
+Daten erfolgt i.d.R. immer über den Router und dieser managed alles). Die Port-Nummern 
+der Shards entnehmen wir der Cluster-Config, die mit ... 
 
     > sh.status()
 
@@ -116,3 +129,4 @@ arbeiten. Soll alles weggeräumt werden, das komplette Verzeichnis löschen
 
 
 link zu mtools: https://github.com/rueckstiess/mtools 
+
