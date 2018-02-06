@@ -126,10 +126,10 @@ Step 1. Connect to MongoDB-Router
 Step 2. Create a Database and a Collection with only one Dokument:
 
       > use myDatabase
-      > db.myCollection.insert({firstename:"Peter", lastname:"Kessler"})
+      > db.myCollection.insert({"AnzDok":"0", "Timestamp":"gerade eben", "Remark":"manuell eingefügt"})
       > db.myCollection.find()
 
-Step 3. Check on which shard the Database was created (use the primary of each replica set)
+Step 3. Check on which shard the document was inserted (use the primary of each replica set)
 
       > mongo --host 192.168.0.111 --port 27108 (assuming shard01a is primary)
       > show dbs
@@ -138,7 +138,7 @@ Step 3. Check on which shard the Database was created (use the primary of each r
       > mongo --host 192.168.0.131 --port 27108 (assuming shared03a is primary)
       > show dbs
       
-You should see the database only on one of the shards:
+You should see the document in only on one of the shards, bit there in all 3 replica sets:
 
 Step 4. Check whether the database.collection.document is on all replica-sets in the shards
 
@@ -157,6 +157,6 @@ Step 4. Check whether the database.collection.document is on all replica-sets in
       
 Step 5. Create more documents and check whether they are really sharded and replicated
 
-      > ...
+      > python3 dataLoad.py
 
 
