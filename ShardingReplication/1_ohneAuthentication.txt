@@ -30,9 +30,19 @@ Linux-Shell oder über ein MongoDB GUI "normal" zugegriffen werden.
     > mongo --port 30000
 
 Öffnet eine MongoDB Shell auf dem MongoDB Router mongos. Damit kann der Cluster 
-angesprochen werden, als ob es eine einige MongoDB Instanz ist. Die Verteilung der
-Daten auf die Shards und die Spiegelung der Daten auf die Replica-Sets managed
-MongoDB von alleine.
+angesprochen werden, als ob es eine einige MongoDB Instanz ist. 
+
+Nun müssen wir im Mongo Router noch das Sharding einrichten. Dazu Verbindeun wir uns mit 
+dem Mongo Router
+
+    > mongo --port 30000
+    > use myDatabase
+    > db.myCollection.ensureIndex({_id:"hashed"})
+    > sh.enableSharding("myDatabase")
+    > sh.shardCollection("myDatabase.myCollection", {"_id": "hashed"})
+
+Die Verteilung der Daten auf die Shards und die Spiegelung der Daten auf die Replica-Sets 
+managed MongoDB nun von alleine.
 
 Da dieser Cluster mit allen Komponenten redundant aufgesetzt ist, gibt es auch 
 dreiMongo Router (mongos), die über die Ports 30000, 30001 und 30002 angesprochen
@@ -130,3 +140,9 @@ arbeiten. Soll alles weggeräumt werden, das komplette Verzeichnis löschen
 
 link zu mtools: https://github.com/rueckstiess/mtools 
 
+
+
+In einem zweiten Durchgang kann die Verteilung der Dokumente auf die Shards 
+beobachtet werden. Dazu gibt es ein Python-Script "dataLoad.py" in diesem
+Verzeichnis, mit dem eine beliebige Anzahl Dokumente erstellt werden kann.
+Die gewünschte Anzahl auf Zeile 36 im Script entsprechend anpassen.
