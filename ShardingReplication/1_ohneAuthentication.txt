@@ -45,7 +45,7 @@ Die Verteilung der Daten auf die Shards und die Spiegelung der Daten auf die Rep
 managed MongoDB nun von alleine.
 
 Da dieser Cluster mit allen Komponenten redundant aufgesetzt ist, gibt es auch 
-dreiMongo Router (mongos), die über die Ports 30000, 30001 und 30002 angesprochen
+drei Mongo Router (mongos), die über die Ports 30000, 30001 und 30002 angesprochen
 werden. Somit kann den drei Mongo Router ein Load-Balancer vorgeschaltet werden.
 
 Wenn nun ein (ein einziges) Document in der Datenbank myDatabase in der Collection
@@ -57,7 +57,7 @@ Erstellen wir ein Dokument wie folgt:
     > show dbs
     > use myDatebase
     > show collections
-    > db.myCollection.insert({firstname:"Peter", lastname:"Kessler"})
+    > db.myCollection.insert("AnzDok":"0", "Timestamp":"gerade eben", "Remark":"manuell eingefügt")
     > db.myCollection.find()
 
 Damit haben wir die Datenbank myDatabase angelegt (resp. ausgewählt wenn diese bereits 
