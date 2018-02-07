@@ -11,6 +11,7 @@
 *
 *
 
+
 Init und Starten eines MongoDB Clusters mit Authentifizierung: 
 
     > mlaunch init \
@@ -30,16 +31,24 @@ Auflisten der Cluster Komponenten:
     > mlaunch list
 
 
-Zugreifen auf den Cluster: Alle Kommunikation mit dem Cluster erfolgt über die 
-Mongo Router (mongos). Dieser ist auf dem Port 30000. Somit kann aus einer
-Linux-Shell oder über ein MongoDB GUI "normal" zugegriffen werden. 
+Nun müssen wir im Mongo Router noch das Sharding einrichten. Dazu Verbindeun wir uns mit 
+dem Mongo Router. Alle Kommunikation mit dem Cluster erfolgt über die Mongo Router (mongos). 
+Dieser ist auf dem Port 30000. 
 
     > mongo --port 30000
+    > use myDatabase
+    > db.myCollection.ensureIndex({_id:"hashed"})
+    > sh.enableSharding("myDatabase")
+    > sh.shardCollection("myDatabase.myCollection", {"_id": "hashed"})
 
-Öffnet eine MongoDB Shell auf dem MongoDB Router mongos. Damit kann der Cluster 
-angesprochen werden, als ob es eine einzige MongoDB Instanz ist. Die Verteilung der
-Daten auf die Shards und die Spiegelung der Daten auf die Replica-Sets sowie die 
-User-Authentication managed MongoDB von alleine.
+Die Verteilung der Daten auf die Shards und die Spiegelung der Daten auf die Replica-Sets 
+managed MongoDB nun von alleine.
+
+
+Damit kann der Cluster angesprochen werden, als ob es eine einzige MongoDB Instanz ist. 
+Die Verteilung der Daten auf die Shards und die Spiegelung der Daten auf die Replica-Sets 
+sowie die User-Authentication managed MongoDB von alleine.
+
 
 Mit ...
 
@@ -51,6 +60,15 @@ Mit ...
 
 ... die Datenbank myDatabase anlegen (resp. auswählen wenn bereits vorhanden) und darin 
     ein Dokument in der Collection myCollection anlegen und anzeigen lassen. 
+
+
+Mit Authentifizierung ist der Zugriff auf die einzelnen Shards nicht ohne weiteres möglich.
+Dazu müssten auf jedem der Shards entsprechende User eingerichtet werden. In produktiven 
+Umgebungen empfiehlt sich dies, um damit die Möglichkeit zu haben, auf einem Shard selber
+Wartungs- / Korrekturarbeiten vornehmen zu können.
+
+In dieser Demo verzichte ich darauf. Dass das Sharding und die Replikation mit dieser 
+Konfiguration funktioniert, ist im ersten Beislpiel (ohne Authentifizierung) bewiesen.
 
 
 Stoppen des Cluster: 

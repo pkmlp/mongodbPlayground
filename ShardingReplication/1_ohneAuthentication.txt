@@ -33,7 +33,7 @@ Linux-Shell oder über ein MongoDB GUI "normal" zugegriffen werden.
 angesprochen werden, als ob es eine einige MongoDB Instanz ist. 
 
 Nun müssen wir im Mongo Router noch das Sharding einrichten. Dazu Verbindeun wir uns mit 
-dem Mongo Router
+dem Mongo Router (sofern wir nicht schon drin sind)
 
     > mongo --port 30000
     > use myDatabase
@@ -49,7 +49,7 @@ drei Mongo Router (mongos), die über die Ports 30000, 30001 und 30002 angesproc
 werden. Somit kann den drei Mongo Router ein Load-Balancer vorgeschaltet werden.
 
 Wenn nun ein (ein einziges) Document in der Datenbank myDatabase in der Collection
-myCollection erstellt wird, so wid dieses Dokument auf einem der Shards angelegt und 
+myCollection erstellt wird, so wid dieses Dokument auf einem der Shards eingefügt und 
 dort auch auf die Replica-Sets gespiegelt. 
 
 Erstellen wir ein Dokument wie folgt:
@@ -61,7 +61,7 @@ Erstellen wir ein Dokument wie folgt:
     > db.myCollection.find()
 
 Damit haben wir die Datenbank myDatabase angelegt (resp. ausgewählt wenn diese bereits 
-vorhanden) und darin ein Dokument in der Collection myCollection angelegt und angezeigt. 
+vorhanden war) und darin ein Dokument in der Collection myCollection angelegt und angezeigt. 
 
 Um nun zu sehen, auf welchem Shard die DB (das Dokument) angelegt wurde, greifen wir 
 direkt auf die Shards zu (Wichtig: dies ist egentlich nicht üblich. Der Zugriff auf die 
@@ -111,8 +111,8 @@ Replica-Set des Shards ein ...
 
     > "errmsg" : "not master and slaveOk=false"
 
-Das bedeutet, das wir nicht ohne weiteres Daten aus einem der Replica-Sets lesen
-können. Wir müssen explizit angeben, dass wir wissen, dass wir auf ein Replica-Set
+Das bedeutet, das wir nicht ohne weiteres Daten aus einem der Secondary-Replica-Sets 
+lesen können. Wir müssen explizit angeben, dass wir wissen, dass wir auf ein Replica-Set
 zugreifen und dass wir nichts ändern wollen:
 
     > db.setSlaveOk()

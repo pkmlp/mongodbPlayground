@@ -40,36 +40,18 @@ TODO:
 This script has a `sleep 20` to wait for the config server and shards to elect their primaries before initializing the router
 
 
-**Verify the status of the sharded cluster**
 
-	> docker-compose exec router mongo
-	mongos> sh.status()
+## Enabling Sharding and check status
 
-``` 
---- Sharding Status --- 
-  sharding version: {
-        "_id" : 1,
-        "minCompatibleVersion" : 5,
-        "currentVersion" : 6,
-        "clusterId" : ObjectId("5a795a6b5179f663653ba8b3")
-  }
-  shards:
-        {  "_id" : "shard01",  "host" : "shard01/shard01a:27018,shard01b:27018,shard01c:27018",  "state" : 1 }
-        {  "_id" : "shard02",  "host" : "shard02/shard02a:27019,shard02b:27019,shard02c:27019",  "state" : 1 }
-        {  "_id" : "shard03",  "host" : "shard03/shard03a:27020,shard03b:27020,shard03c:27020",  "state" : 1 }
-  active mongoses:
-        "3.6.2" : 1
-  autosplit:
-        Currently enabled: yes
-  balancer:
-        Currently enabled:  yes
-        Currently running:  no
-        Failed balancer rounds in last 5 attempts:  0
-        Migration Results for the last 24 hours:
-                No recent migrations
-  databases:
-        {  "_id" : "config",  "primary" : "config",  "partitioned" : true }
-```
+To enable sharding:
+
+      > docker-compose exec router mongo
+      > use myDatabase
+      > db.myCollection.ensureIndex({_id:"hashed"})
+      > sh.enableSharding("myDatabase")
+      > sh.shardCollection("myDatabase.myCollection", {"_id": "hashed"})
+      > sh.status()
+
 
 
 ## Normal Startup
@@ -81,7 +63,7 @@ simply with `docker-compose up` or `docker-compose up -d`
 
 ## Accessing the Mongo Shell
 
-Its as simple as:
+Its as simple as we did before:
 
 	> docker-compose exec router mongo
 
@@ -126,37 +108,41 @@ Step 1. Connect to MongoDB-Router
 Step 2. Create a Database and a Collection with only one Dokument:
 
       > use myDatabase
-      > db.myCollection.insert({"AnzDok":"0", "Timestamp":"gerade eben", "Remark":"manuell eingefügt"})
+      > db.myCollection.insert({"AnzDok":"1", "Timestamp":"gerade eben", "Remark":"manuell eingefügt"})
       > db.myCollection.find()
 
 Step 3. Check on which shard the document was inserted (use the primary of each replica set)
 
-      > mongo --host 192.168.0.111 --port 27108 (assuming shard01a is primary)
+      > mongo --host 192.168.0.111 --port 27018 (assuming shard01a is primary)
       > show dbs
-      > mongo --host 192.168.0.121 --port 27108 (assuming shared02a is primary)
+      > mongo --host 192.168.0.121 --port 27019 (assuming shared02a is primary)
       > show dbs
-      > mongo --host 192.168.0.131 --port 27108 (assuming shared03a is primary)
+      > mongo --host 192.168.0.131 --port 27020 (assuming shared03a is primary)
       > show dbs
       
 You should see the document in only on one of the shards, bit there in all 3 replica sets:
 
 Step 4. Check whether the database.collection.document is on all replica-sets in the shards
 
-      > mongo --host 192.168.0.121 --port 27108 (assuming the database.collection.document is on shared2)
+      > mongo --host 192.168.0.121 --port 27018 (assuming the database.collection.document is on shared2)
       > use myDatabase
       > db.myCollection.find()
       > quit()
-      > mongo --host 192.168.0.122 --port 27108 
+      > mongo --host 192.168.0.122 --port 27018 
       > use myDatabase
       > db.myCollection.find()
       > quit()
-      > mongo --host 192.168.0.123 --port 27108 
+      > mongo --host 192.168.0.123 --port 27018 
       > use myDatabase
       > db.myCollection.find()
       > quit()
       
 Step 5. Create more documents and check whether they are really sharded and replicated
 
-      > python3 dataLoad.py
-
+      > db.myCollection.insert({"AnzDok":"2", "Timestamp":"gerade eben", "Remark":"manuell eingefügt"})
+      > db.myCollection.insert({"AnzDok":"3", "Timestamp":"gerade eben", "Remark":"manuell eingefügt"})
+      > db.myCollection.insert({"AnzDok":"4", "Timestamp":"gerade eben", "Remark":"manuell eingefügt"})
+      > db.myCollection.insert({"AnzDok":"5", "Timestamp":"gerade eben", "Remark":"manuell eingefügt"})
+      > ...
+      > db.myCollection.insert({"AnzDok":"13", "Timestamp":"gerade eben", "Remark":"manuell eingefügt"})
 
