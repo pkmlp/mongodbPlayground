@@ -4,6 +4,11 @@ Quelle: https://github.com/jfollenfant/mongodb-sharding-docker-compose
 
 
 
+## work in progress - authentication does not work (permission denied for keyfile)
+
+
+
+
 :whale: docker-compose stack that allows you to turn on a full MongoDB sharded cluster with the following components :
 
  * configserver replicaset: 3x mongod with configsrv enabled 
@@ -15,10 +20,7 @@ Quelle: https://github.com/jfollenfant/mongodb-sharding-docker-compose
 
 :warning: Of course this is for development purpose only  
 
-    # Usage :
-    $ git clone git@github.com:jfollenfant/mongodb-sharding-docker-compose.git
-    $ mongodb-sharding-docker-compose
-    $ ./up.sh
+    > ./up.sh
     
     
 You can also edit mongo-auth.init.js to change admin credentials before turning up the cluster
@@ -32,24 +34,36 @@ You can also edit mongo-auth.init.js to change admin credentials before turning 
       }
     )
 
-:tropical_drink: Then you should be able to log into the cluster:
 
-    $ docker exec -it mongodbdocker_mongo-router-01_1 mongo admin  -u'admin' -p'admin'
-    MongoDB shell version v3.4.2
-    connecting to: mongodb://127.0.0.1:27017/admin
-    MongoDB server version: 3.4.2
-    mongos>
+:beer: log in to the cluster:
+
+    > docker exec -it mongodbdocker_mongo-router-01_1 mongo admin  -u'admin' -p'admin'
+
+
+:beer: enable sharding and check status
+
+    > use myDatabase
+    > db.myCollection.ensureIndex({_id:"hashed"})
+    > sh.enableSharding("myDatabase")
+    > sh.shardCollection("myDatabase.myCollection", {"_id": "hashed"})
+    > sh.status()    
+
+
+:tropical_drink: work with the cluster
+
+    > use myDatabase
+    > db.myCollection.insert({"AnzDok":"1", "Timestamp":"gerade eben", "Remark":"manuell eingefügt"})
+    > db.myCollection.find()
+    > db.myCollection.find().count()
+
+    > db.myCollection.insert({"AnzDok":"2", "Timestamp":"gerade eben", "Remark":"manuell eingefügt"})
+    > ... and so on ...
+    > db.myCollection.insert({"AnzDok":"13", "Timestamp":"gerade eben", "Remark":"manuell eingefügt"})
+    > db.myCollection.find()
+    > db.myCollection.find().count()
     
-  
 
 :beer: And turn it down with:
 
-    $ ./down.sh
-    
-    
-   # TODO :construction:
-   
-  * Generate random data to populate shards through balancing 
-  * Update compose syntax to v3 
-  * Use swarm capabilities for production grade deployment 
-  
+    > ./down.sh
+
