@@ -30,7 +30,7 @@ You can also edit mongo-auth.init.js to change admin credentials before turning 
       {
          user: "admin",
          pwd: "admin",
-         roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] 
+         roles: [ { role: "root", db: "admin" } ] 
       }
     )
 
