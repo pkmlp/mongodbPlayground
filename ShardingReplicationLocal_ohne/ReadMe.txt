@@ -1,5 +1,5 @@
 *
-* Demo eines MongoDB Clusters ohne Authentifizierung 
+* Demo eines MongoDB Clusters auf localhost ohne Authentifizierung 
 *
 *     --> zu Demozwecken und um direkt auf jeden einzelnen
 *         Shard und direkt die einzelnen Replica-Set-Member 

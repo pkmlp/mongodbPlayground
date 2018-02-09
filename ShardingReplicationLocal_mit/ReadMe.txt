@@ -1,5 +1,5 @@
 *
-* Demo eines MongoDB Clusters mit Authentifizierung
+* Demo eines MongoDB Clusters auf localhost mit Authentifizierung
 *
 * Beachte dazu unbedingt: https://docs.mongodb.com/manual/core/security-users/#sharding-security 
 *   --> direkter Zugriff auf die einzelnen Shards ist nicht ohne zusätzliche Aktionen möglich
@@ -35,7 +35,7 @@ Nun müssen wir im Mongo Router noch das Sharding einrichten. Dazu Verbindeun wi
 dem Mongo Router. Alle Kommunikation mit dem Cluster erfolgt über die Mongo Router (mongos). 
 Dieser ist auf dem Port 30000. 
 
-    > mongo --port 30000
+    > mongo --port 30000 -u mongoAdmin -p pkmlp --authenticationDatabase admin
     > use myDatabase
     > db.myCollection.ensureIndex({_id:"hashed"})
     > sh.enableSharding("myDatabase")
