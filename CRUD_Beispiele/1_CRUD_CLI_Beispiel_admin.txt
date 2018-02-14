@@ -12,13 +12,8 @@
 * von myDatabase zu verwenden.
 *
 
--> mongo -u mongoAdmin -p pkmlp --authenticationDatabase admin 
--> mongo -u mongoAdmin -p --authenticationDatabase admin
-
-oder
-
--> mongo -u pkmlp -p pkmlp --authenticationDatabase meineDatenbank 
--> mongo -u pkmlp -p --authenticationDatabase meineDatenbank
+    > mongo -u mongoAdmin -p pkmlp --authenticationDatabase admin 
+    > mongo -u mongoAdmin -p --authenticationDatabase admin
 
 
 
@@ -36,11 +31,7 @@ oder
 * Die Datenbank wird erst beim Erstellen einer Collection erstellt
 *
 
-> use myDatabase (falls mit User mongoAdmin eingeloggt)
-
-oder
-
-> use meineDatenbank (falls mit User pkmlp eingeloggt)
+    > use myDatabase 
 
 
 
@@ -48,7 +39,7 @@ oder
 * Anzeigen, welche Datenbank selektiert ist
 *
 
-> db 
+    > db 
 
 
 
@@ -56,7 +47,7 @@ oder
 * Anzeigen der Collections in der ausgewählten Datenbank
 *
 
-> show collections 
+    > show collections 
 
 
 
@@ -64,11 +55,8 @@ oder
 * Erstellen einer Collection (sofern nicht vorhanden) in der ausgewählten Datenbank
 *
 
-> db.createCollection("myCollection") (falls mit User mongoAdmin eingeloggt)
+    > db.createCollection("myCollection") 
 
-oder 
-
-> db.createCollection("meineSammlung") (falls mit User pkmlp eingeloggt)
 
 
 *
@@ -87,19 +75,20 @@ oder
   }
 )
 
-oder
+*
+* Einfügen eines weiteren Dokumentes in die Collection in der ausgewählten Datenbank (C aus CRUD)
+*
 
-> db.meineSammlung.insertOne(
-  {
-    firstname: "Peter",
-    lastname: "Kessler",
-    contactdata: {
-        email: "peter.kessler@students.ffhs.ch",
-        mobile: "+41 79 670 01 13",
-        home: "+41 44 371 75 62"
-    }
-  }
-)
+    > db.myCollection.insertOne(
+      {
+        firstname: "Ursula",
+        lastname: "Deriu",
+        contactdata: {
+            email: "ursula.deriu@ffhs.ch"
+        },
+        role: "Teacher CAS Big Data"
+      }
+    )
 
 
 
@@ -107,7 +96,8 @@ oder
 * Lesen aller Dokumente in der Collection in der ausgewählten Datenbank (R aus CRUD)
 *
 
-> db.myCollection.find()
+    > db.myCollection.find().count()
+    > db.myCollection.find()
 
 
 
@@ -115,11 +105,7 @@ oder
 * Lesen eines Dokumentes in der Collection in der ausgewählten Datenbank (R aus CRUD)
 *
 
-> db.myCollection.find({firstname: "Peter"})
-
-oder
-
-> db.meineSammlung.find({firstname: "Peter"})
+    > db.myCollection.find({firstname: "Peter"})
 
 
 
@@ -127,28 +113,19 @@ oder
 * Mutieren eines Dokumentes in der Collection in der ausgewählten Datenbank (U aus CRUD)
 *
 
-> db.myCollection.update(
-    { firstname: "Peter" },
-    { $set: { firstname: "Peter E." } }
-  )
+    > db.myCollection.update(
+        { firstname: "Peter" },
+        { $set: { firstname: "Peter E." } }
+      )
 
-oder
 
-> db.meineSammlung.update(
-    { firstname: "Peter" },
-    { $set: { firstname: "Peter E." } }
-  )
 
 
 *
 * Löschen eines Dokumentes in der Collection in der ausgewählten Datenbank (D aus CRUD)
 *
 
-> db.myCollection.remove({lastname: "Kessler"})
-
-oder
-
-> db.meineSammlung.remove({lastname: "Kessler"})
+    > db.myCollection.remove({lastname: "Kessler"})
 
 
 
@@ -156,11 +133,7 @@ oder
 * Löschen einer Collecction in der selektierten Datenbank
 *
 
-> db.myCollection.drop()
-
-oder
-
-> db.meineSammlung.drop()
+    > db.myCollection.drop()
 
 
 
@@ -168,7 +141,7 @@ oder
 * Löschen der selektierten Datenbank
 *
 
-> db.dropDatabase()
+    > db.dropDatabase()
 
 
 
@@ -176,5 +149,6 @@ oder
 * Schliessen der MongoDB Shell und Verbindung zu MongoDB beenden
 *
 
-> quit()
+  > quit()
+
 

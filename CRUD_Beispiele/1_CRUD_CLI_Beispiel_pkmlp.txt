@@ -1,0 +1,180 @@
+*
+* Starten der MongoDB Shell (CLI) und Verbindung zu MongoDB herstellen
+*
+* Auf der lokalen MongoDB Instanz (auf Standard Port 27017) sind zwei User
+* eingerichtet:
+*
+*    -> mongoAdmin / pkmlp (der MongoDB Administrator)
+*    -> pkmlp / pkmlp (ein User mit DB-Admin-Rechten auf meineDatenbank)
+*
+*
+*
+* Für das folgende CRUD-Beispiel verwende ich den User pkmlp. Dieser hat keine 
+* Administratorrechte auf dem Datenbank-Server. Er ist Owner der Datenbank 
+* meineDatenbank und ist auch nur für diese Datenbank berechtigt.
+*
+* Hinweis: mit cls kann in der Mongo-Shell der Bildschirm gelöscht werden
+*
+*
+*
+
+*
+* Verbinden mit dem Datenbank-Server:
+*
+
+    > mongo -u pkmlp -p pkmlp --authenticationDatabase meineDatenbank 
+    > mongo -u pkmlp -p --authenticationDatabase meineDatenbank
+
+
+*
+* Auswählen der Datenbank
+*
+
+    > use meineDatenbank
+
+
+
+*
+* Anzeigen, welche Datenbank selektiert ist
+*
+
+    > db 
+
+
+
+*
+* Anzeigen der Collections in der ausgewählten Datenbank
+*
+
+    > show collections 
+
+
+
+*
+* Erstellen einer Collection (sofern nicht vorhanden) in der ausgewählten Datenbank
+*
+
+    > db.createCollection("meineSammlung") (könnte wie im Video-Vortrag erwähnt sinnvoller sein)
+
+
+
+*
+* Einfügen eines Dokumentes in die Collection in der ausgewählten Datenbank (C aus CRUD)
+*
+
+    > db.meineSammlung.insertOne(
+      {
+        firstname: "Peter",
+        lastname: "Kessler",
+        contactdata: {
+            email: "peter.kessler@students.ffhs.ch",
+            mobile: "+41 79 670 01 13",
+            home: "+41 44 371 75 62"
+        }
+      }
+    )
+
+
+
+*
+* Einfügen eines weiteren Dokumentes in die Collection in der ausgewählten Datenbank (C aus CRUD)
+*
+
+    > db.meineSammlung.insertOne(
+      {
+        firstname: "Ursula",
+        lastname: "Deriu",
+        contactdata: {
+            email: "ursula.deriu@ffhs.ch"
+        },
+        role: "Teacher CAS Big Data"
+      }
+    )
+
+
+
+*
+* Anzeigen der Anzahl der Dokumente in der Collection in der ausgewählten Datenbank (R aus CRUD)
+*
+
+    > db.meineSammlung.find().count()
+
+
+
+*
+* Lesen/Anzeigen aller Dokumente in der Collection in der ausgewählten Datenbank (R aus CRUD)
+*
+
+    > db.meineSammlung.find()
+    > db.meineSammlung.find().pretty()    (verschönert die Ausgabe des Dokumentes)
+ 
+
+
+*
+* Lesen eines Dokumentes in der Collection in der ausgewählten Datenbank (R aus CRUD)
+*
+
+    > db.meineSammlung.find({firstname: "Peter"})
+    > db.meineSammlung.find({firstname: "Peter"}).pretty()
+
+    > db.meineSammlung.find({lastname: "Deriu"})
+    > db.meineSammlung.find({lastname: "Deriu"}).pretty()
+
+
+*
+* Mutieren eines Dokumentes in der Collection in der ausgewählten Datenbank (U aus CRUD)
+*
+
+    > db.meineSammlung.update(
+        { firstname: "Peter" },
+        { $set: { firstname: "Peter E." } }
+      )
+
+
+*
+* Anzeigen der Mutation des Dokumentes in der Collection in der ausgewählten Datenbank (R aus CRUD)
+*
+
+    > db.meineSammlung.find({firstname: "Peter"})
+    > db.meineSammlung.find({firstname: "Peter E."})
+
+
+*
+* Löschen eines Dokumentes in der Collection in der ausgewählten Datenbank (D aus CRUD)
+*
+
+    > db.meineSammlung.remove({lastname: "Kessler"})
+
+
+
+*
+* Kontrollieren, ob Löschen des Dokumentes erfolgreich war (R aus CRUD)
+*
+
+    > db.meineSammlung.find().count()
+    > db.meineSammlung.find()
+
+
+*
+* Löschen der Collecction in der selektierten Datenbank
+*
+
+    > db.meineSammlung.drop()
+
+
+
+*
+* Löschen der selektierten Datenbank
+*
+
+    > db.dropDatabase()
+
+
+
+*
+* Schliessen der MongoDB Shell (schliesst Verbindung zu MongoDB)
+*
+
+    > quit()
+
+

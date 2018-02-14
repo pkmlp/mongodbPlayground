@@ -1,5 +1,5 @@
 *
-* Für die CRUD-Beispiel mit einem GUI stehen die zwei MongoDB-GUI
+* Für die CRUD-Beispiele mit einem GUI stehen die zwei MongoDB-GUIs
 *
 *   --> MongoDB Compass (das von MongoDB selbst herausgegebene GUI) und
 *   --> Studio 3t (ein sehr mächtiges Third-Party-Tool)
