@@ -105,8 +105,9 @@
 * Lesen/Anzeigen aller Dokumente in der Collection in der ausgewählten Datenbank (R aus CRUD)
 *
 
-    > db.meineSammlung.find()
-    > db.meineSammlung.find().pretty()    (verschönert die Ausgabe des Dokumentes)
+    > db.meineSammlung.find()             (zeigt alle Dokumente)
+    > db.meineSammlung.findOne()          (zeigt nur das erste Dokument)
+    > db.meineSammlung.find().pretty()    (verschönert die Ausgabe der/des Dokumente/s)
  
 
 
