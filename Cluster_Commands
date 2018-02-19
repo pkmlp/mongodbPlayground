@@ -1,0 +1,132 @@
+
+*********************************************************************************************
+*********************************************************************************************
+*********************************************************************************************
+* Hadoop HDFS installieren, konfigurieren, kontrollieren, testen, …
+*********************************************************************************************
+*********************************************************************************************
+*********************************************************************************************
+
+
+Mit SSH auf bd-1 einloggen (im Verzeichnis: /home/pkmlp/CAS_Big_Data/SwitchCluster/)
+> ssh -i id_rsa_bd 86.119.31.109  -l ubuntu
+
+User wechseln
+> su - hduser (Passwort: hd)
+
+Im Verzeichnis /opt die installierten Services ansehen
+> cd /opt
+> ls
+
+Zurück ins Home-Verzeichnis
+> cd
+
+Den Name-Node formatieren
+> hdfs namenode -format
+
+Hadoop starten
+> start-dfs.sh
+
+Kontrolle ob Hadoop läuft
+> jps
+
+	Erwarteter Output (auf bd-1)
+		- NameNode
+		- SecondaryNameNode
+
+
+
+Kontrollieren der Slaves (Worker-Nodes)
+
+Mit SSH auf bd-3 einloggen (aus bd-1 heraus)
+> ssh bd-3
+
+
+Kontrolle ob Hadoop läuft
+> jps
+
+	Erwarteter Output (auf bd-3)
+		- DataNode
+
+
+
+
+Damit ist Hadoop HDFS gestartet :-) 
+Nun starten wir mit den ersten Schritten mit HDFS
+
+
+Auf hdfs ein Verzeichnis anlegen:
+
+> hdfs dfs -mkdir /user
+> hdfs dfs -ls /
+> hdfs dfs -mkdir /user/hduser
+
+
+Ein File vom lokalen (bd-1) Filesystem auf hdfs kopieren:
+
+Auf bd-1 ins Home-Verzeichnis gehen
+> cd ~
+
+Das File testme.txt anschauen
+> more testme.txt
+
+Das File testme.txt auf hadoop laden
+> hdfs dfs -put ~/testme.txt /user/hduser
+> hdfs dfs -ls /
+
+
+
+Hdfs via Browser einsehen
+
+Öffnen Sie einen Browser auf Ihrem Laptop
+> http://86.119.31.109:50070
+
+
+Im Browser im Menü “Utilities”, Untermenu “Browse the filesystem”
+/ eingeben und Go! Klicken um im hdfs-Filesystem zu browsen.
+
+
+
+
+*********************************************************************************************
+*********************************************************************************************
+*********************************************************************************************
+* YARN installieren, konfigurieren, kontrollieren, testen, …
+*********************************************************************************************
+*********************************************************************************************
+*********************************************************************************************
+
+Auf bd-1 mit user hduser (weiter) arbeiten
+
+	Mit SSH auf bd-1 einloggen (im Verzeichnis: /home/pkmlp/CAS_Big_Data/SwitchCluster/)
+	> ssh -i id_rsa_bd 86.119.31.109  -l ubuntu
+	
+	User wechseln
+	> su - hduser  (Passwort: hd)
+
+
+YARN starten
+> start-yarn.sh
+
+Kontrolle ob Yarn läuft
+> jps
+
+
+	Erwarteter Output - zusätzlich neu:
+		> ResourceManager
+		
+
+Kontrolliere auf den Worker-Nodes (z.B. bd-3)
+
+	Erwartet wird zusätzlich neu:
+		> NodeManager
+
+
+
+Yarn-Prozesse einsehen - Web Interface zum Resource Manager
+Öffnen Sie auf Ihrem Laptop einen Browser, resp einen neuen Tab im Browser
+> http://86.119.31.109:8088
+
+
+
+
