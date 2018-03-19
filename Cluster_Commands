@@ -138,8 +138,15 @@ Yarn-Prozesse einsehen - Web Interface zum Resource Manager
 *********************************************************************************************
 *********************************************************************************************
 *********************************************************************************************
-
+*
+* auf bd-1 als hduser
+*
 start-dfs.sh
+start-yarn.sh
+*
+*
+* auf bd-2 als hduser
+*
 sudo service mysql start
 hive --service metastore &
 hiveserver2 &
