@@ -134,10 +134,26 @@ Yarn-Prozesse einsehen - Web Interface zum Resource Manager
 *********************************************************************************************
 *********************************************************************************************
 *********************************************************************************************
-* HIVE 
+* HIVE und Zeppelin
 *********************************************************************************************
 *********************************************************************************************
 *********************************************************************************************
+*
+* SwitchCluster aus WebBrowser starten
+*
+https://engines.switch.ch/horizon/quickstart/
+
+
+
+*
+* aus Verzeichnis /home/pkmlp/CAS_Big_Data/SwitchCluster in SwitchCluster einloggen 
+* und User auf hduser wechseln
+*
+ssh -i id_rsa_bd 86.119.31.109  -l ubuntu
+su - hduser
+
+
+
 *
 * auf bd-1 als hduser
 *
@@ -151,19 +167,10 @@ web ui Öffnen: http://86.119.31.109:10002/
 
 
 
-beeline
-!connect jdbc:hive2://localhost:10000
-
-create table ....... ;
-load data local inpath 'file:///home/hduser/....' into table ..... ;
-
-
 *
 * auf bd-2 als hduser
 *
 zeppelin-daemon.sh start
 
-web ui Öffnen: http://86.119.31.103:8080/
-
-
+web ui Öffnen: http://86.119.31.103:8080/  (admin/pkmlp)
 
