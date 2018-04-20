@@ -42,7 +42,7 @@ print(colorful_json)
 resp = requests.get('https://cloud.belimo.com/api/v3/devices/cd5c280f-5d59-4089-bd6a-e850e4cc400b/data/history/datapoints/evcloud.150?limit=10', headers={'Authorization':'Bearer 709628e9-c28a-4e48-b2ed-19289b202ad8'})
 resp.content
 
-# Abfragen der letzten 10 Werte (limit=10) eines Datapoints (evcloud.150 = Temperature 1 embedded in Grad Kelvin) und formaitert anzeigen
+# Abfragen der letzten 10 Werte (limit=10) eines Datapoints (evcloud.150 = Temperature 1 embedded in Grad Kelvin) und formatiert anzeigen
 resp = requests.get('https://cloud.belimo.com/api/v3/devices/cd5c280f-5d59-4089-bd6a-e850e4cc400b/data/history/datapoints/evcloud.150?limit=10', headers={'Authorization':'Bearer 709628e9-c28a-4e48-b2ed-19289b202ad8'})
 formatted_json = json.dumps(resp.json(), indent=4)
 colorful_json = highlight(unicode(formatted_json, 'UTF-8'), lexers.JsonLexer(), formatters.TerminalFormatter()) 
