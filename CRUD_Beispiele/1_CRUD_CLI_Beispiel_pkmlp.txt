@@ -1,4 +1,13 @@
 *
+*
+*
+* ==========================================================
+* Dieses Beispiel setzt eine laufende MongoDB Instanz voraus
+* MongoDB ist in * der VM pkmlpLernumgebung installiert
+* ==========================================================
+*
+*
+*
 * Starten der MongoDB Shell (CLI) und Verbindung zu MongoDB herstellen
 *
 * Auf der lokalen MongoDB Instanz (auf Standard Port 27017) sind zwei User

@@ -1,4 +1,14 @@
 *
+*
+*
+* ===================================================
+* Dieses Beispiel setzt eine laufende MongoDB Instanz
+* und die zwei unten genannten GUIs voraus (ist in 
+* der VM pkmlpLernumgebung installiert)
+* ===================================================
+*
+*
+*
 * Für die CRUD-Beispiele mit einem GUI stehen die zwei MongoDB-GUIs
 *
 *   --> MongoDB Compass (das von MongoDB selbst herausgegebene GUI) und
@@ -12,4 +22,13 @@
 * das Prinzip der JSON Dokumente und der Erstellung, Löschung und Änderung 
 * von Dokumenten in einer Dokumenten-Datenbank geübt wird.
 *
+*
+*
+*
+* ===================================================
+* Die weitere Datei: 3_CRUD_API_Python.ipynb setzt
+* Jupyter voraus und zeigt MongoDB mit Python
+* ===================================================
+*
+* 
 *
