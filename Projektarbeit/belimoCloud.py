@@ -6,7 +6,7 @@
 #    E-Valve 54: 656cdd47-9950-4080-a416-f2a2b2202fb4
 #
 #
-# Auth-Token (scheint immer gleich zu sein, sonst siehe Notebook): 
+# Auth-Token (scheint immer gleich zu sein, sonst siehe OneNote Notebook): 
 #    'Authorization':'Bearer 709628e9-c28a-4e48-b2ed-19289b202ad8'
 #
 #
