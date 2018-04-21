@@ -6,7 +6,7 @@
 #    E-Valve 54: 656cdd47-9950-4080-a416-f2a2b2202fb4
 #
 #
-# Auth-Token (scheint immer gleich zu sein, sonst siehe OneNote Notebook): 
+# Auth-Token (siehe OneNote Notebook): 
 #    'Authorization':'Bearer 709628e9-c28a-4e48-b2ed-19289b202ad8'
 #
 #
@@ -19,7 +19,7 @@ from pygments import highlight, lexers, formatters
 
 
 # Abfrage
-resp = requests.get('https://cloud.belimo.com/api/v3/devices/cd5c280f-5d59-4089-bd6a-e850e4cc400b/data', headers={'Authorization':'Bearer 709628e9-c28a-4e48-b2ed-19289b202ad8'})
+resp = requests.get('https://cloud.belimo.com/api/v3/devices/cd5c280f-5d59-4089-bd6a-e850e4cc400b/data', headers={'Authorization':'Bearer 13ee33a2-f0af-4f06-812d-29cc36f8fd8e'})
 
 # HTTP-Status der Abfrage prüfen (200 = OK)
 resp.status_code
@@ -43,7 +43,7 @@ resp = requests.get('https://cloud.belimo.com/api/v3/devices/cd5c280f-5d59-4089-
 resp.content
 
 # Abfragen der letzten 10 Werte (limit=10) eines Datapoints (evcloud.150 = Temperature 1 embedded in Grad Kelvin) und formatiert anzeigen
-resp = requests.get('https://cloud.belimo.com/api/v3/devices/cd5c280f-5d59-4089-bd6a-e850e4cc400b/data/history/datapoints/evcloud.150?limit=10', headers={'Authorization':'Bearer 709628e9-c28a-4e48-b2ed-19289b202ad8'})
+resp = requests.get('https://cloud.belimo.com/api/v3/devices/cd5c280f-5d59-4089-bd6a-e850e4cc400b/data/history/datapoints/evcloud.150?limit=10', headers={'Authorization':'Bearer 13ee33a2-f0af-4f06-812d-29cc36f8fd8e'})
 formatted_json = json.dumps(resp.json(), indent=4)
 colorful_json = highlight(unicode(formatted_json, 'UTF-8'), lexers.JsonLexer(), formatters.TerminalFormatter()) 
 print(colorful_json)

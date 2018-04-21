@@ -174,3 +174,58 @@ zeppelin-daemon.sh start
 
 web ui Öffnen: http://86.119.31.103:8080/  (admin/pkmlp)
 
+
+
+
+
+*********************************************************************************************
+*********************************************************************************************
+*********************************************************************************************
+* Spark (PVA3)
+*********************************************************************************************
+*********************************************************************************************
+*********************************************************************************************
+*
+* SwitchCluster aus WebBrowser starten
+*
+https://engines.switch.ch/horizon/quickstart/
+
+
+
+*
+* Spark Cluster auf SwitchCluster:
+*   - bd-1:  Cluster-Manager (aka Driver)
+*   - bd-3:  Worker
+*   - bd-4:  Worker
+*   - bd-5:  Worker
+*
+
+*
+* aus Verzeichnis /home/pkmlp/CAS_Big_Data/SwitchCluster in SwitchCluster einloggen 
+* und User auf hduser wechseln
+*
+ssh -i id_rsa_bd 86.119.31.109  -l ubuntu
+su - hduser
+
+*
+* auf bd-1 als hduser
+*
+start-dfs.sh
+spark-start-all.sh
+hiveserver2
+
+*
+* webui Spark: http://86.119.31.109:8080/ 
+*
+
+
+*
+* auf bd-2 als hduser
+*
+zeppelin-daemon.sh start
+
+web ui Öffnen: http://86.119.31.103:8080/  (admin/pkmlp)
+
+
+
+
