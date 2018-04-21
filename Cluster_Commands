@@ -212,10 +212,10 @@ su - hduser
 *
 start-dfs.sh
 spark-start-all.sh
-hiveserver2
+hiveserver2 &
 
 *
-* webui Spark: http://86.119.31.109:8080/ 
+* web-ui Spark: http://86.119.31.109:8080/ 
 *
 
 
@@ -225,7 +225,6 @@ hiveserver2
 zeppelin-daemon.sh start
 
 web ui Öffnen: http://86.119.31.103:8080/  (admin/pkmlp)
-
 
 
 
