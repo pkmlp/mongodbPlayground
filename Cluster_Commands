@@ -212,6 +212,8 @@ su - hduser
 *
 start-dfs.sh
 spark-start-all.sh
+sudo service mysql start
+hive --service metastore &
 hiveserver2 &
 
 *
