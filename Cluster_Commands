@@ -271,6 +271,10 @@ web ui Öffnen: http://86.119.31.103:8080/  (admin/pkmlp)
 
 
 
+*
+* Flume starten:
+*
 
+flume-ng agent -n belimoCloudAgent -c conf -f belimoCloudFlume.config
 
 
