@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import requests
 import sys
@@ -17,7 +19,7 @@ from pygments import highlight, lexers, formatters
 #     Auth-Token (Aendert, Zeitabhängig, Beschaffung siehe OneNote Notebook): 
 #         'Authorization':'Bearer 709628e9-c28a-4e48-b2ed-19289b202ad8'
 #
-authToken = '15aeb80f-c5a9-4059-bccc-11d7c99519a6'
+authToken = 'fe0cf642-5d57-4d89-95be-1825d98a04d4'
 
 #
 # Abfrage der Daten des Devices E-Valve 51 (cd5c280f-5d59-4089-bd6a-e850e4cc400b)
