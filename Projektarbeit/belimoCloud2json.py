@@ -4,7 +4,7 @@ import json
 import time 
 
 
-authToken = 'ba754091-348a-4a49-8d36-817117335b78'
+authToken = 'fe0cf642-5d57-4d89-95be-1825d98a04d4'
 
 while True:
     with open('cloudData.json', 'a') as outputfile:
