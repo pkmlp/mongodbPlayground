@@ -270,6 +270,10 @@ zeppelin-daemon.sh start
 web ui Öffnen: http://86.119.31.103:8080/  (admin/pkmlp)
 
 
+*
+* auf bd-1 als hduser
+*
+
 
 *
 * Flume starten:
@@ -277,4 +281,13 @@ web ui Öffnen: http://86.119.31.103:8080/  (admin/pkmlp)
 
 flume-ng agent -n belimoCloudAgent -c conf -f belimoCloudFlume.config
 
+*
+* Hdfs via Browser einsehen
+*
 
+> http://86.119.31.109:50070
+
+*
+* Im Browser im Menü “Utilities”, Untermenu “Browse the filesystem”
+* eingeben und Go! Klicken um im hdfs-Filesystem zu browsen.
+*
