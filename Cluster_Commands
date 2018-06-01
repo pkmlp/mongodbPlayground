@@ -276,7 +276,7 @@ web ui Öffnen: http://86.119.31.103:8080/  (admin/pkmlp)
 
 
 *
-* Flume starten:
+* Flume starten (im Verzeichnis in dem sich das Config-File befindet):
 *
 
 flume-ng agent -n belimoCloudAgent -c conf -f belimoCloudFlume.config
@@ -291,3 +291,6 @@ flume-ng agent -n belimoCloudAgent -c conf -f belimoCloudFlume.config
 * Im Browser im Menü “Utilities”, Untermenu “Browse the filesystem”
 * eingeben und Go! Klicken um im hdfs-Filesystem zu browsen.
 *
+
+
+
