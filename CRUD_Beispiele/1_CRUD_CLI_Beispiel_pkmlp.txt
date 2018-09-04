@@ -3,7 +3,7 @@
 *
 * ==========================================================
 * Dieses Beispiel setzt eine laufende MongoDB Instanz voraus
-* MongoDB ist in * der VM pkmlpLernumgebung installiert
+* MongoDB ist in der VM pkmlpLernumgebung installiert
 * ==========================================================
 *
 *
