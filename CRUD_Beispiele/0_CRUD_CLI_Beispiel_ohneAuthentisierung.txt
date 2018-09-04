@@ -1,0 +1,156 @@
+*
+* ===================================================
+* Dieses Beispiel setzt eine laufende MongoDB Instanz
+* voraus, die ohne Authentifizierung aufgesetzt ist !
+* ===================================================
+*
+*
+*
+* Starten der MongoDB Shell (CLI) und 
+* Verbindung zu MongoDB herstellen
+*
+
+    > mongo
+
+
+
+*
+* Anzeigen der Datenbanken
+*
+
+> show dbs 
+> show databases 
+
+
+
+*
+* Auswählen (wenn nicht vorhanden Erstellen) einer Datenbank
+* Die Datenbank wird erst beim Erstellen einer Collection erstellt
+*
+
+    > use myDatabase 
+
+
+
+*
+* Anzeigen, welche Datenbank selektiert ist
+*
+
+    > db 
+
+
+
+*
+* Anzeigen der Collections in der ausgewählten Datenbank
+*
+
+    > show collections 
+
+
+
+*
+* Erstellen einer Collection (sofern nicht vorhanden) in der 
+* ausgewählten Datenbank
+*
+
+    > db.createCollection("myCollection") 
+
+
+
+*
+* Einfügen eines Dokumentes in die Collection in der  
+* ausgewählten Datenbank (C aus CRUD)
+*
+
+> db.myCollection.insertOne(
+  {
+    firstname: "Peter",
+    lastname: "Kessler",
+    contactdata: {
+        email: "peter.kessler@students.ffhs.ch",
+        mobile: "+41 79 670 01 13",
+        home: "+41 44 371 75 62"
+    }
+  }
+)
+
+*
+* Einfügen eines weiteren Dokumentes in die Collection 
+* in der ausgewählten Datenbank (C aus CRUD)
+*
+
+    > db.myCollection.insertOne(
+      {
+        firstname: "Ursula",
+        lastname: "Deriu",
+        contactdata: {
+            email: "ursula.deriu@ffhs.ch"
+        },
+        role: "Teacher CAS Big Data"
+      }
+    )
+
+
+
+*
+* Lesen aller Dokumente in der Collection in der 
+* ausgewählten Datenbank (R aus CRUD)
+*
+
+    > db.myCollection.find().count()
+    > db.myCollection.find()
+
+
+
+*
+* Lesen eines Dokumentes in der Collection in der 
+* ausgewählten Datenbank (R aus CRUD)
+*
+
+    > db.myCollection.find({firstname: "Peter"})
+
+
+
+*
+* Mutieren eines Dokumentes in der Collection in der 
+* ausgewählten Datenbank (U aus CRUD)
+*
+
+    > db.myCollection.update(
+        { firstname: "Peter" },
+        { $set: { firstname: "Peter E." } }
+      )
+
+
+
+
+*
+* Löschen eines Dokumentes in der Collection in der 
+* ausgewählten Datenbank (D aus CRUD)
+*
+
+    > db.myCollection.remove({lastname: "Kessler"})
+
+
+
+*
+* Löschen einer Collecction in der selektierten Datenbank
+*
+
+    > db.myCollection.drop()
+
+
+
+*
+* Löschen der selektierten Datenbank
+*
+
+    > db.dropDatabase()
+
+
+
+*
+* Schliessen der MongoDB Shell und Verbindung zu MongoDB beenden
+*
+
+  > quit()
